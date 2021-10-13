@@ -59,6 +59,7 @@
     "semi": false,
     "trailingComma": "all",
     "bracketSpacing": false,
-    "bracketSameLine": false
+    "bracketSameLine": false,
+    "endOfLine": "auto"
   }
 }
