@@ -8,6 +8,8 @@ const state = {
     gridSizeW: 0,
     gridSizeH: 0,
     dotSize: 5,
+    bg: '#eee',
+    fg: '#555',
 }
 
 const units = <{[key in keyof typeof state]: string}>{
@@ -18,22 +20,24 @@ const units = <{[key in keyof typeof state]: string}>{
     gridSizeW: '',
     gridSizeH: '',
     dotSize: 'px',
+    bg: '',
+    fg: '',
 }
 
 export default createStore({
     state: new Proxy(state, {
-        set: (obj, prop: keyof typeof state, value): boolean => {
+        set: <T extends keyof typeof state>(obj: typeof state, prop: T, value: typeof state[T]): boolean => {
             obj[prop] = value
             document.body.style.setProperty(`--${prop}`, value + units[prop])
             return true
         },
     }),
     mutations: {
-        initialise(state) {
-            const storeKeys = Object.keys(state) as Array<keyof typeof state>
+        initialise: <T extends keyof typeof state>(store: typeof state) => {
+            const storeKeys = Object.keys(store) as Array<T>
             for (const storeKey of storeKeys) {
                 // eslint-disable-next-line no-self-assign
-                state[storeKey] = state[storeKey]
+                store[storeKey] = store[storeKey]
             }
         },
         setAppSize(state, size: {w: number; h: number}) {

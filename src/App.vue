@@ -36,5 +36,6 @@ body {
 #app {
     width: var(--appWidth);
     height: var(--appHeight);
+    background-color: var(--bg);
 }
 </style>
