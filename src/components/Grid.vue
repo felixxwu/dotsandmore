@@ -16,7 +16,7 @@ import Cell from './Cell.vue'
         Cell,
     },
 })
-export default class AppSizeUpdater extends Vue {
+export default class Grid extends Vue {
     get cellCoords(): {x: number; y: number}[] {
         let coords: {x: number; y: number}[] = []
         for (let x = 0; x < store.state.gridSizeW; x++) {

@@ -11,7 +11,7 @@
 import {Vue} from 'vue-class-component'
 import {Prop} from 'vue-property-decorator'
 
-export default class AppSizeUpdater extends Vue {
+export default class Cell extends Vue {
     @Prop() readonly size: {w: number; h: number} | null = null
 }
 </script>

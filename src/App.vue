@@ -1,7 +1,6 @@
 <template>
     <div id="app">
-        Hello world
-        <Grid />
+        <Game />
 
         <AppSizeUpdater />
     </div>
@@ -12,12 +11,12 @@ import {Options, Vue} from 'vue-class-component'
 import store from '@/store/index'
 
 import AppSizeUpdater from '@/components/AppSizeUpdater.vue'
-import Grid from '@/components/Grid.vue'
+import Game from '@/components/Game.vue'
 
 @Options({
     components: {
         AppSizeUpdater,
-        Grid,
+        Game,
     },
 })
 export default class App extends Vue {
