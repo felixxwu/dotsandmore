@@ -1,30 +1,50 @@
 import {createStore} from 'vuex'
-import {Line} from '@/types.d.ts'
+import {LineType, Coord} from '@/types.d.ts'
 
 const storeState = {
+    // lengths
     appWidth: 0,
     appHeight: 0,
     paddingMed: 10,
     cellWidth: 30,
+    dotSize: 4,
+
+    // numbers
     gridSizeW: 0,
     gridSizeH: 0,
-    dotSize: 4,
+    maxLineLength: 5,
+
+    // colours
     bg: '#eee',
     fg: '#555',
-    lines: <Line[]>[],
+    highlight: 'rgba(0,0,0,0.1)',
+
+    // other
+    lines: <LineType[]>[],
+    clickedCoord: <Coord | null>null,
 }
 
 const units = <{[key in keyof typeof storeState]: string}>{
+    // lengths
     appWidth: 'px',
     appHeight: 'px',
     paddingMed: 'px',
     cellWidth: 'px',
+    dotSize: 'px',
+
+    // numbers
     gridSizeW: '',
     gridSizeH: '',
-    dotSize: 'px',
+    maxLineLength: '',
+
+    // colours
     bg: '',
     fg: '',
-    lines: '',
+    highlight: '',
+
+    // other
+    lines: 'hide',
+    clickedCoord: 'hide',
 }
 
 export default createStore({
@@ -35,7 +55,9 @@ export default createStore({
             value: typeof storeState[T],
         ): boolean => {
             obj[prop] = value
-            document.body.style.setProperty(`--${prop}`, value + units[prop])
+            if (units[prop] !== 'hide') {
+                document.body.style.setProperty(`--${prop}`, value + units[prop])
+            }
             return true
         },
     }),
@@ -55,9 +77,15 @@ export default createStore({
             state.gridSizeW = size.w
             state.gridSizeH = size.h
         },
-        addLine(state, line: Line) {
+        addLine(state, line: LineType) {
             state.lines.push(line)
-            console.log('line', line)
+            state.clickedCoord = null
+        },
+        clickCoord(state, coord: Coord) {
+            state.clickedCoord = coord
+        },
+        clearClickedCoord(state) {
+            state.clickedCoord = null
         },
     },
     actions: {},

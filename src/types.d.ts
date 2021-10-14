@@ -1,4 +1,4 @@
 type Coord = {x: number; y: number}
-type Line = {start: Coord; end: Coord}
+type LineType = {start: Coord; end: Coord}
 
-export {Coord, Line}
+export {Coord, LineType}

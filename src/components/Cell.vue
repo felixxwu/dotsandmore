@@ -1,5 +1,5 @@
 <template>
-    <div class="cell">
+    <div class="cell" @click="handleClick" :style="style">
         <svg class="dot">
             <!--suppress RequiredAttributes -->
             <circle class="circle" />
@@ -9,10 +9,47 @@
 
 <script lang="ts">
 import {Vue} from 'vue-class-component'
-import {Prop} from 'vue-property-decorator'
+import {Prop, Watch} from 'vue-property-decorator'
+import {Coord, LineType} from '@/types'
+import store from '@/store/index'
+import lineLengthChecker from '@/utils/lineLengthChecker'
 
 export default class Cell extends Vue {
-    @Prop() readonly size: {w: number; h: number} | null = null
+    @Prop() readonly coord: Coord
+
+    inRangeOfFirstClick = false
+
+    handleClick(): void {
+        if (store.state.clickedCoord) {
+            const line: LineType = {start: store.state.clickedCoord, end: this.coord}
+            const inRange = lineLengthChecker(line)
+            if (inRange) {
+                store.commit('addLine', line)
+                console.log('line added')
+            } else {
+                console.log('too long!')
+                store.commit('clearClickedCoord')
+            }
+        } else {
+            store.commit('clickCoord', this.coord)
+            console.log('click again...')
+        }
+    }
+
+    get style(): string {
+        return `
+            background-color: ${this.inRangeOfFirstClick ? 'var(--highlight)' : ''};
+        `
+    }
+
+    @Watch('$store.state.clickedCoord') clickedCoordChange(): void {
+        if (!store.state.clickedCoord) {
+            this.inRangeOfFirstClick = false
+            return
+        }
+        const line: LineType = {start: store.state.clickedCoord, end: this.coord}
+        this.inRangeOfFirstClick = lineLengthChecker(line)
+    }
 }
 </script>
 
@@ -23,6 +60,11 @@ export default class Cell extends Vue {
     align-items: center;
     width: var(--cellWidth);
     height: var(--cellWidth);
+    cursor: pointer;
+}
+
+.cell:hover {
+    background-color: var(--highlight);
 }
 
 .dot {
