@@ -1,15 +1,23 @@
 import {createStore} from 'vuex'
 
 const state = {
-    paddingMed: 10,
     appWidth: 0,
     appHeight: 0,
+    paddingMed: 10,
+    cellWidth: 30,
+    gridSizeW: 0,
+    gridSizeH: 0,
+    dotSize: 5,
 }
 
 const units = <{[key in keyof typeof state]: string}>{
-    paddingMed: 'px',
     appWidth: 'px',
     appHeight: 'px',
+    paddingMed: 'px',
+    cellWidth: 'px',
+    gridSizeW: '',
+    gridSizeH: '',
+    dotSize: 'px',
 }
 
 export default createStore({
@@ -28,9 +36,13 @@ export default createStore({
                 state[storeKey] = state[storeKey]
             }
         },
-        setAppSize(state, size: {width: number; height: number}) {
-            state.appWidth = size.width
-            state.appHeight = size.height
+        setAppSize(state, size: {w: number; h: number}) {
+            state.appWidth = size.w
+            state.appHeight = size.h
+        },
+        setGridSize(state, size: {w: number; h: number}) {
+            state.gridSizeW = size.w
+            state.gridSizeH = size.h
         },
     },
     actions: {},

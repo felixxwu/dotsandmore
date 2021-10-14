@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         Hello world
-        <Grid :size="{w: 10, h: 10}" />
+        <Grid />
 
         <AppSizeUpdater />
     </div>
@@ -23,6 +23,7 @@ import Grid from '@/components/Grid.vue'
 export default class App extends Vue {
     mounted(): void {
         store.commit('initialise')
+        store.commit('setGridSize', {w: 15, h: 10})
     }
 }
 </script>

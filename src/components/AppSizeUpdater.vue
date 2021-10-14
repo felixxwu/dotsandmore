@@ -15,8 +15,8 @@ export default class AppSizeUpdater extends Vue {
 
     updateWindowSize(): void {
         store.commit('setAppSize', {
-            width: window.innerWidth,
-            height: window.innerHeight,
+            w: window.innerWidth,
+            h: window.innerHeight,
         })
         document.body.style.width = window.innerWidth + 'px'
         document.body.style.height = window.innerHeight + 'px'
