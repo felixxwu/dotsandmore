@@ -60,6 +60,7 @@
     "trailingComma": "all",
     "bracketSpacing": false,
     "bracketSameLine": false,
-    "endOfLine": "auto"
+    "endOfLine": "auto",
+    "printWidth": 120
   }
 }
