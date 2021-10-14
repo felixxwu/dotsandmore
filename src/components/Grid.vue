@@ -6,10 +6,10 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-class-component'
-// import {Prop} from 'vue-property-decorator'
 import store from '@/store/index'
 
 import Cell from './Cell.vue'
+import {Coord} from '@/types.d.ts'
 
 @Options({
     components: {
@@ -17,8 +17,8 @@ import Cell from './Cell.vue'
     },
 })
 export default class Grid extends Vue {
-    get cellCoords(): {x: number; y: number}[] {
-        let coords: {x: number; y: number}[] = []
+    get cellCoords(): Coord[] {
+        let coords: Coord[] = []
         for (let x = 0; x < store.state.gridSizeW; x++) {
             for (let y = 0; y < store.state.gridSizeH; y++) {
                 coords.push({x, y})
