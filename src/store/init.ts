@@ -5,7 +5,7 @@ const storeState = {
     appWidth: 0,
     appHeight: 0,
     paddingMed: 10,
-    cellWidth: 50,
+    cellWidth: 30,
     dotSize: 4,
 
     // numbers
