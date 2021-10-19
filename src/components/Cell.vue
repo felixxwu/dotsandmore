@@ -12,7 +12,8 @@ import {Vue} from 'vue-class-component'
 import {Prop, Watch} from 'vue-property-decorator'
 import {Coord, LineType} from '@/types'
 import store from '@/store/index'
-import lineLengthChecker from '@/utils/lineLengthChecker'
+import isLineTooLong from '@/utils/isLineTooLong'
+import createLine from '@/utils/createLine'
 
 export default class Cell extends Vue {
     @Prop() readonly coord: Coord
@@ -21,15 +22,8 @@ export default class Cell extends Vue {
 
     handleClick(): void {
         if (store.state.clickedCoord) {
-            const line: LineType = {start: store.state.clickedCoord, end: this.coord}
-            const inRange = lineLengthChecker(line)
-            if (inRange) {
-                store.commit('addLine', line)
-                console.log('line added')
-            } else {
-                console.log('too long!')
-                store.commit('clearClickedCoord')
-            }
+            store.commit('addLine', createLine(store.state.clickedCoord, this.coord))
+            console.log('line added')
         } else {
             store.commit('clickCoord', this.coord)
             console.log('click again...')
@@ -48,7 +42,7 @@ export default class Cell extends Vue {
             return
         }
         const line: LineType = {start: store.state.clickedCoord, end: this.coord}
-        this.inRangeOfFirstClick = lineLengthChecker(line)
+        this.inRangeOfFirstClick = !isLineTooLong(line)
     }
 }
 </script>

@@ -1,8 +1,9 @@
 import {LineType} from '@/types'
 import store from '@/store/index'
+import euclideanDistance from '@/utils/euclideanDistance'
 
 export default (line: LineType): boolean => {
-    const squaredLength = Math.pow(line.start.x - line.end.x, 2) + Math.pow(line.start.y - line.end.y, 2)
+    const squaredLength = euclideanDistance(line.start, line.end, true)
     const squaredMaxLength = Math.pow(store.state.maxLineLength, 2)
-    return squaredMaxLength > squaredLength
+    return squaredMaxLength <= squaredLength
 }

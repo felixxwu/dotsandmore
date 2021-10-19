@@ -22,7 +22,7 @@ import Game from '@/components/Game.vue'
 export default class App extends Vue {
     mounted(): void {
         store.commit('initialise')
-        store.commit('setGridSize', {w: 15, h: 15})
+        store.commit('setGridSize', {w: 7, h: 7})
     }
 }
 </script>
