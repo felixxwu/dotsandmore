@@ -1,5 +1,5 @@
 <template>
-    <div class="cell" @pointerdown="handlePointerDown" @pointermove="handlePointerMove" @pointerup="handlePointerUp">
+    <div class="cell">
         <svg class="dot">
             <!--suppress RequiredAttributes -->
             <circle class="circle" />
@@ -13,36 +13,11 @@ import {Prop, Watch} from 'vue-property-decorator'
 import {Coord, LineType} from '@/types'
 import store from '@/store/index'
 import isLineTooLong from '@/utils/isLineTooLong'
-import createLine from '@/utils/createLine'
-import isSameCoordinate from '@/utils/isSameCoordinate'
 
 export default class Cell extends Vue {
     @Prop() readonly coord: Coord
 
     inRangeOfFirstClick = false
-
-    handlePointerDown(): void {
-        store.commit('clickCoord', this.coord)
-    }
-
-    handlePointerMove(): void {
-        if (store.state.clickedCoord === null) return
-        if (isSameCoordinate(store.state.clickedCoord, this.coord)) {
-            store.commit('setLinePreview', null)
-        } else {
-            store.commit('setLinePreview', createLine(store.state.clickedCoord, this.coord))
-        }
-    }
-
-    handlePointerUp(): void {
-        if (store.state.clickedCoord === null) return
-        if (isSameCoordinate(store.state.clickedCoord, this.coord)) {
-            store.commit('setLinePreview', null)
-            store.commit('clickCoord', null)
-        } else {
-            store.commit('addLine', createLine(store.state.clickedCoord, this.coord))
-        }
-    }
 
     @Watch('$store.state.clickedCoord') clickedCoordChange(): void {
         if (!store.state.clickedCoord) {
@@ -63,6 +38,7 @@ export default class Cell extends Vue {
     width: var(--cellWidth);
     height: var(--cellWidth);
     cursor: pointer;
+    touch-action: none;
 }
 
 .dot {
