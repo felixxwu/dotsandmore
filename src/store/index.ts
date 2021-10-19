@@ -33,15 +33,18 @@ export default createStore({
             state.gridSizeH = size.h
         },
         addLine(state, line: LineType) {
-            console.log('line', line)
             state.lines.push(line)
             state.clickedCoord = null
+            state.linePreview = null
         },
         clickCoord(state, coord: Coord) {
             state.clickedCoord = coord
         },
         clearClickedCoord(state) {
             state.clickedCoord = null
+        },
+        setLinePreview(state, line: LineType) {
+            state.linePreview = line
         },
     },
     actions: {},

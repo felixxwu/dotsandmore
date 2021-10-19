@@ -10,7 +10,6 @@ export default (start: Coord, end: Coord): LineType => {
     const tooLong = isLineTooLong(line)
     if (tooLong) {
         const maxLengthLine = shortenLine(line, store.state.maxLineLength)
-        console.log('maxLengthLine', maxLengthLine)
         const closestValidEnd = getClosestValidEnd(maxLengthLine)
         if (closestValidEnd === null) throw Error('no valid coordinates found for shortening this line')
         line.end = closestValidEnd

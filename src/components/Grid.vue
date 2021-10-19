@@ -1,7 +1,8 @@
 <template>
     <div class="grid">
         <svg class="lines">
-            <Line v-for="line in lines" :key="line" :lineData="line" />
+            <Line v-for="line in lines" :key="line" :line-data="line" :is-preview="false" />
+            <Line v-if="linePreview !== null" :line-data="linePreview" :is-preview="true" />
         </svg>
         <Cell v-for="coord in cellCoords" :key="coord" :coord="coord" />
     </div>
@@ -34,6 +35,10 @@ export default class Grid extends Vue {
 
     get lines(): LineType[] {
         return store.state.lines
+    }
+
+    get linePreview(): LineType | null {
+        return store.state.linePreview
     }
 }
 </script>

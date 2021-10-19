@@ -1,5 +1,5 @@
 <template>
-    <div class="cell" @click="handleClick" :style="style">
+    <div class="cell" @pointerdown="handlePointerDown" @pointermove="handlePointerMove" @pointerup="handlePointerUp">
         <svg class="dot">
             <!--suppress RequiredAttributes -->
             <circle class="circle" />
@@ -14,26 +14,34 @@ import {Coord, LineType} from '@/types'
 import store from '@/store/index'
 import isLineTooLong from '@/utils/isLineTooLong'
 import createLine from '@/utils/createLine'
+import isSameCoordinate from '@/utils/isSameCoordinate'
 
 export default class Cell extends Vue {
     @Prop() readonly coord: Coord
 
     inRangeOfFirstClick = false
 
-    handleClick(): void {
-        if (store.state.clickedCoord) {
-            store.commit('addLine', createLine(store.state.clickedCoord, this.coord))
-            console.log('line added')
+    handlePointerDown(): void {
+        store.commit('clickCoord', this.coord)
+    }
+
+    handlePointerMove(): void {
+        if (store.state.clickedCoord === null) return
+        if (isSameCoordinate(store.state.clickedCoord, this.coord)) {
+            store.commit('setLinePreview', null)
         } else {
-            store.commit('clickCoord', this.coord)
-            console.log('click again...')
+            store.commit('setLinePreview', createLine(store.state.clickedCoord, this.coord))
         }
     }
 
-    get style(): string {
-        return `
-            background-color: ${this.inRangeOfFirstClick ? 'var(--highlight)' : ''};
-        `
+    handlePointerUp(): void {
+        if (store.state.clickedCoord === null) return
+        if (isSameCoordinate(store.state.clickedCoord, this.coord)) {
+            store.commit('setLinePreview', null)
+            store.commit('clickCoord', null)
+        } else {
+            store.commit('addLine', createLine(store.state.clickedCoord, this.coord))
+        }
     }
 
     @Watch('$store.state.clickedCoord') clickedCoordChange(): void {
@@ -55,10 +63,6 @@ export default class Cell extends Vue {
     width: var(--cellWidth);
     height: var(--cellWidth);
     cursor: pointer;
-}
-
-.cell:hover {
-    background-color: var(--highlight);
 }
 
 .dot {

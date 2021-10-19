@@ -5,7 +5,7 @@ const storeState = {
     appWidth: 0,
     appHeight: 0,
     paddingMed: 10,
-    cellWidth: 30,
+    cellWidth: 50,
     dotSize: 4,
 
     // numbers
@@ -16,9 +16,11 @@ const storeState = {
     // colours
     bg: '#eee',
     fg: '#555',
+    fg2: '#bbb',
     highlight: 'rgba(0,0,0,0.1)',
 
     // other
+    linePreview: <LineType | null>null,
     lines: <LineType[]>[],
     clickedCoord: <Coord | null>null,
 }
@@ -39,9 +41,11 @@ const units = <{[key in keyof typeof storeState]: string}>{
     // colours
     bg: '',
     fg: '',
+    fg2: '',
     highlight: '',
 
     // other
+    linePreview: 'hide',
     lines: 'hide',
     clickedCoord: 'hide',
 }
