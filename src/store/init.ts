@@ -12,6 +12,8 @@ const storeState = {
     gridSizeW: 0,
     gridSizeH: 0,
     maxLineLength: 2.5,
+    mouseThrottle: 20,
+    minDistanceToLineForShadow: 1,
 
     // colours
     bg: '#eee',
@@ -23,6 +25,7 @@ const storeState = {
     linePreview: <LineType | null>null,
     lines: <LineType[]>[],
     clickedCoord: <Coord | null>null,
+    lightSource: <Coord>{y: 0, x: window.innerWidth / 2},
 }
 
 const units = <{[key in keyof typeof storeState]: string}>{
@@ -37,6 +40,8 @@ const units = <{[key in keyof typeof storeState]: string}>{
     gridSizeW: '',
     gridSizeH: '',
     maxLineLength: '',
+    mouseThrottle: '',
+    minDistanceToLineForShadow: '',
 
     // colours
     bg: '',
@@ -48,6 +53,7 @@ const units = <{[key in keyof typeof storeState]: string}>{
     linePreview: 'hide',
     lines: 'hide',
     clickedCoord: 'hide',
+    lightSource: 'hide',
 }
 
 export {storeState, units}

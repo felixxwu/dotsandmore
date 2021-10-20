@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" @mousemove="handleMouseMove">
         <Game />
 
         <AppSizeUpdater />
@@ -9,9 +9,10 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-class-component'
 import store from '@/store/index'
-
+import {throttle} from 'throttle-debounce'
 import AppSizeUpdater from '@/components/AppSizeUpdater.vue'
 import Game from '@/components/Game.vue'
+import {Coord} from '@/types'
 
 @Options({
     components: {
@@ -20,9 +21,20 @@ import Game from '@/components/Game.vue'
     },
 })
 export default class App extends Vue {
+    updateLightSourceInStore = throttle(store.state.mouseThrottle, false, (point: Coord) => {
+        setTimeout(() => {
+            store.commit('setLightSourcePos', point)
+        })
+    })
+
     mounted(): void {
         store.commit('initialise')
-        store.commit('setGridSize', {w: 7, h: 7})
+        store.commit('setGridSize', {w: 10, h: 10})
+    }
+
+    handleMouseMove(e: MouseEvent): void {
+        const point = {x: e.clientX, y: e.clientY}
+        this.updateLightSourceInStore(point)
     }
 }
 </script>

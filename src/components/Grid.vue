@@ -1,5 +1,5 @@
 <template>
-    <div class="grid">
+    <div class="grid" ref="grid">
         <div
             class="touch-surface"
             @pointerdown="handlePointerDown"
@@ -7,6 +7,9 @@
             @pointerup="handlePointerUp"
             @pointerleave="handlePointerLeave"
         />
+        <svg class="shadows">
+            <Shadow v-for="line in lines" :key="line" :line-data="line" :grid="grid" />
+        </svg>
         <svg class="lines">
             <Line v-for="line in lines" :key="line" :line-data="line" :is-preview="false" />
             <Line v-if="linePreview !== null" :line-data="linePreview" :is-preview="true" />
@@ -25,14 +28,19 @@ import {Coord, LineType} from '@/types.d.ts'
 import isSameCoordinate from '@/utils/isSameCoordinate'
 import createLine from '@/utils/createLine'
 import getCoord from '@/utils/getCoord'
+import Shadow from '@/components/Shadow.vue'
+import {Ref} from 'vue-property-decorator'
 
 @Options({
     components: {
+        Shadow,
         Cell,
         Line,
     },
 })
 export default class Grid extends Vue {
+    @Ref() readonly grid: HTMLDivElement
+
     handlePointerDown(e: PointerEvent): void {
         const coord = getCoord(e)
         if (coord === null) return
@@ -108,5 +116,16 @@ export default class Grid extends Vue {
     width: calc(var(--gridSizeW) * var(--cellWidth));
     height: calc(var(--gridSizeH) * var(--cellWidth));
     touch-action: none;
+}
+
+.shadows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--appWidth);
+    height: var(--appHeight);
+    pointer-events: none;
+    opacity: 0.02;
+    filter: blur(1px);
 }
 </style>

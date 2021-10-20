@@ -46,6 +46,9 @@ export default createStore({
         setLinePreview(state, line: LineType) {
             state.linePreview = line
         },
+        setLightSourcePos(state, pos: Coord) {
+            state.lightSource = pos
+        },
     },
     actions: {},
     modules: {},

@@ -1,5 +1,5 @@
 <template>
-    <line class="line" :x1="x1" :y1="y1" :x2="x2" :y2="y2" :style="style" />
+    <line class="line" :x1="linePos.x1" :y1="linePos.y1" :x2="linePos.x2" :y2="linePos.y2" :style="style" />
 </template>
 
 <script lang="ts">
@@ -12,20 +12,13 @@ export default class Line extends Vue {
     @Prop() readonly lineData: LineType
     @Prop() readonly isPreview: boolean
 
-    get x1(): number {
-        return this.lineData.start.x * store.state.cellWidth + store.state.cellWidth / 2
-    }
-
-    get y1(): number {
-        return this.lineData.start.y * store.state.cellWidth + store.state.cellWidth / 2
-    }
-
-    get x2(): number {
-        return this.lineData.end.x * store.state.cellWidth + store.state.cellWidth / 2
-    }
-
-    get y2(): number {
-        return this.lineData.end.y * store.state.cellWidth + store.state.cellWidth / 2
+    get linePos(): {x1: number; y1: number; x2: number; y2: number} {
+        return {
+            x1: this.lineData.start.x * store.state.cellWidth + store.state.cellWidth / 2,
+            y1: this.lineData.start.y * store.state.cellWidth + store.state.cellWidth / 2,
+            x2: this.lineData.end.x * store.state.cellWidth + store.state.cellWidth / 2,
+            y2: this.lineData.end.y * store.state.cellWidth + store.state.cellWidth / 2,
+        }
     }
 
     get style(): string {
