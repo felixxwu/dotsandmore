@@ -7,6 +7,7 @@ const storeState = {
     paddingMed: 10,
     cellWidth: 30,
     dotSize: 4,
+    shadowBlurRadius: 0,
 
     // numbers
     gridSizeW: 0,
@@ -14,6 +15,7 @@ const storeState = {
     maxLineLength: 2.5,
     mouseThrottle: 20,
     minDistanceToLineForShadow: 1,
+    shadowOpacity: 0.03,
 
     // colours
     bg: '#eee',
@@ -35,6 +37,7 @@ const units = <{[key in keyof typeof storeState]: string}>{
     paddingMed: 'px',
     cellWidth: 'px',
     dotSize: 'px',
+    shadowBlurRadius: 'px',
 
     // numbers
     gridSizeW: '',
@@ -42,6 +45,7 @@ const units = <{[key in keyof typeof storeState]: string}>{
     maxLineLength: '',
     mouseThrottle: '',
     minDistanceToLineForShadow: '',
+    shadowOpacity: '',
 
     // colours
     bg: '',

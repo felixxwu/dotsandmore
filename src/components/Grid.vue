@@ -125,7 +125,7 @@ export default class Grid extends Vue {
     width: var(--appWidth);
     height: var(--appHeight);
     pointer-events: none;
-    opacity: 0.02;
-    filter: blur(1px);
+    opacity: var(--shadowOpacity);
+    filter: blur(var(--shadowBlurRadius));
 }
 </style>

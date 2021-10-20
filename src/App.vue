@@ -53,16 +53,16 @@ body {
 
 @keyframes colour-loop {
     0% {
-        background-color: hsl(0, 100%, 95%);
+        background-color: hsl(240, 60%, 90%);
     }
     33% {
-        background-color: hsl(120, 100%, 95%);
+        background-color: hsl(360, 60%, 90%);
     }
     67% {
-        background-color: hsl(240, 100%, 95%);
+        background-color: hsl(480, 60%, 90%);
     }
     100% {
-        background-color: hsl(360, 100%, 95%);
+        background-color: hsl(600, 60%, 90%);
     }
 }
 </style>
