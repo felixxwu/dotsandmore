@@ -36,6 +36,21 @@ body {
 #app {
     width: var(--appWidth);
     height: var(--appHeight);
-    background-color: var(--bg);
+    animation: colour-loop 60s infinite linear;
+}
+
+@keyframes colour-loop {
+    0% {
+        background-color: hsl(0, 100%, 95%);
+    }
+    33% {
+        background-color: hsl(120, 100%, 95%);
+    }
+    67% {
+        background-color: hsl(240, 100%, 95%);
+    }
+    100% {
+        background-color: hsl(360, 100%, 95%);
+    }
 }
 </style>
