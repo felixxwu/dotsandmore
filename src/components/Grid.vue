@@ -11,8 +11,8 @@
             <Shadow v-for="line in lines" :key="line" :line-data="line" :grid="grid" />
         </svg>
         <svg class="lines">
-            <Line v-for="line in lines" :key="line" :line-data="line" :is-preview="false" />
             <Line v-if="linePreview !== null" :line-data="linePreview" :is-preview="true" />
+            <Line v-for="line in lines" :key="line" :line-data="line" :is-preview="false" />
         </svg>
         <Cell v-for="coord in cellCoords" :key="coord" :coord="coord" />
     </div>

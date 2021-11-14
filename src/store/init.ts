@@ -20,6 +20,7 @@ const storeState = {
     // colours
     bg: '#eee',
     fg: '#555',
+    fg1p5: '#999',
     fg2: '#bbb',
     highlight: 'rgba(0,0,0,0.1)',
     bgSat: 60,
@@ -52,6 +53,7 @@ const units = <{[key in keyof typeof storeState]: string}>{
     // colours
     bg: '',
     fg: '',
+    fg1p5: '',
     fg2: '',
     highlight: '',
     bgSat: '%',
