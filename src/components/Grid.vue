@@ -30,6 +30,7 @@ import createLine from '@/utils/createLine'
 import getCoord from '@/utils/getCoord'
 import Shadow from '@/components/Shadow.vue'
 import {Ref} from 'vue-property-decorator'
+import log from '@/utils/log'
 
 @Options({
     components: {
@@ -44,6 +45,7 @@ export default class Grid extends Vue {
     handlePointerDown(e: PointerEvent): void {
         const coord = getCoord(e)
         if (coord === null) return
+        log('starting new line at', coord)
         store.commit('clickCoord', coord)
     }
 
@@ -66,7 +68,9 @@ export default class Grid extends Vue {
             store.commit('setLinePreview', null)
             store.commit('clickCoord', null)
         } else {
-            store.commit('addLine', createLine(store.state.clickedCoord, coord))
+            const newLine = createLine(store.state.clickedCoord, coord)
+            log('create new line', newLine)
+            store.commit('addLine', newLine)
         }
     }
 

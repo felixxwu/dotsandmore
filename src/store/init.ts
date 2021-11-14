@@ -17,7 +17,7 @@ const storeState = {
     minDistanceToLineForShadow: 1,
     shadowOpacity: 0.03,
     intersectionTolerance: 0.0001,
-    populateLinesDuration: 10000,
+    populateLinesDuration: 5000,
 
     // colours
     bg: '#eee',
@@ -33,6 +33,7 @@ const storeState = {
     lines: <LineType[]>[],
     clickedCoord: <Coord | null>null,
     lightSource: <Coord>{y: 0, x: window.innerWidth / 2},
+    enableLogs: true,
 }
 
 const units = <{[key in keyof typeof storeState]: string}>{
@@ -68,6 +69,7 @@ const units = <{[key in keyof typeof storeState]: string}>{
     lines: 'hide',
     clickedCoord: 'hide',
     lightSource: 'hide',
+    enableLogs: 'hide',
 }
 
 export {storeState, units}

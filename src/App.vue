@@ -14,6 +14,7 @@ import AppSizeUpdater from '@/components/AppSizeUpdater.vue'
 import Game from '@/components/Game.vue'
 import {Coord} from '@/types'
 import addSafeLine from '@/utils/addSafeLine'
+import log from '@/utils/log'
 
 @Options({
     components: {
@@ -35,6 +36,7 @@ export default class App extends Vue {
     }
 
     async populateWithSafeLines(): Promise<void> {
+        log('populating lines for', store.state.populateLinesDuration, 'ms...')
         let continueAdding = true
         setTimeout(() => {
             continueAdding = false
@@ -43,6 +45,7 @@ export default class App extends Vue {
             addSafeLine()
             await new Promise((r) => setTimeout(r))
         }
+        log('finished populating lines.')
     }
 
     handleMouseMove(e: MouseEvent): void {
