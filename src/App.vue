@@ -13,6 +13,7 @@ import {throttle} from 'throttle-debounce'
 import AppSizeUpdater from '@/components/AppSizeUpdater.vue'
 import Game from '@/components/Game.vue'
 import {Coord} from '@/types'
+import addSafeLine from '@/utils/addSafeLine'
 
 @Options({
     components: {
@@ -30,6 +31,18 @@ export default class App extends Vue {
     mounted(): void {
         store.commit('initialise')
         store.commit('setGridSize', {w: 10, h: 10})
+        this.populateWithSafeLines()
+    }
+
+    async populateWithSafeLines(): Promise<void> {
+        let continueAdding = true
+        setTimeout(() => {
+            continueAdding = false
+        }, store.state.populateLinesDuration)
+        while (continueAdding) {
+            addSafeLine()
+            await new Promise((r) => setTimeout(r))
+        }
     }
 
     handleMouseMove(e: MouseEvent): void {

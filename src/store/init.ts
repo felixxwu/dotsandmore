@@ -17,6 +17,7 @@ const storeState = {
     minDistanceToLineForShadow: 1,
     shadowOpacity: 0.03,
     intersectionTolerance: 0.0001,
+    populateLinesDuration: 10000,
 
     // colours
     bg: '#eee',
@@ -51,6 +52,7 @@ const units = <{[key in keyof typeof storeState]: string}>{
     minDistanceToLineForShadow: '',
     shadowOpacity: '',
     intersectionTolerance: '',
+    populateLinesDuration: '',
 
     // colours
     bg: '',
