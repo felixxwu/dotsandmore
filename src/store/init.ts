@@ -38,7 +38,7 @@ const config = {
     enableLogs:                 {value: true,                  unit: 'hide'},
 }
 
-const typeSafeSet = <T, K extends keyof T, V extends T[K]>(obj: T, key: K, value: V) => {
+const typeSafeSet = <O, K extends keyof O, V extends O[K]>(obj: O, key: K, value: V) => {
     obj[key] = value
 }
 
