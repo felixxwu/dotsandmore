@@ -27,9 +27,10 @@ export default (line1: LineType, line2: LineType): Coord | false => {
 
     const ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denominator
     const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator
+    const smallAmount = 0.0001
 
     // is the intersection along the segments
-    if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
+    if (ua < -smallAmount || ua > 1 + smallAmount || ub < -smallAmount || ub > 1 + smallAmount) {
         return false
     }
 
