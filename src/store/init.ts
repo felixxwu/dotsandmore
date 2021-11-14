@@ -22,6 +22,8 @@ const storeState = {
     fg: '#555',
     fg2: '#bbb',
     highlight: 'rgba(0,0,0,0.1)',
+    bgSat: 60,
+    bgLight: 95,
 
     // other
     linePreview: <LineType | null>null,
@@ -52,6 +54,8 @@ const units = <{[key in keyof typeof storeState]: string}>{
     fg: '',
     fg2: '',
     highlight: '',
+    bgSat: '%',
+    bgLight: '%',
 
     // other
     linePreview: 'hide',

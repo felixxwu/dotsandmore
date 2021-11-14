@@ -53,16 +53,16 @@ body {
 
 @keyframes colour-loop {
     0% {
-        background-color: hsl(240, 60%, 90%);
+        background-color: hsl(240, var(--bgSat), var(--bgLight));
     }
     33% {
-        background-color: hsl(360, 60%, 90%);
+        background-color: hsl(360, var(--bgSat), var(--bgLight));
     }
     67% {
-        background-color: hsl(480, 60%, 90%);
+        background-color: hsl(480, var(--bgSat), var(--bgLight));
     }
     100% {
-        background-color: hsl(600, 60%, 90%);
+        background-color: hsl(600, var(--bgSat), var(--bgLight));
     }
 }
 </style>
