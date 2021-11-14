@@ -15,6 +15,8 @@ export default class Shadow extends Vue {
     @Prop() readonly lineData: LineType
     @Prop() readonly grid: HTMLDivElement
 
+    prevShadowPos = ''
+
     get shadowPos(): string {
         const p = store.state.lightSource
         const gridRect = this.grid.getClientRects()[0]
@@ -39,10 +41,10 @@ export default class Shadow extends Vue {
         const lineMidPoint = projectToLine(p, clientPosLine)
         const mouseToLineMid = {start: p, end: lineMidPoint}
         const lineMidLength = euclideanDistance(mouseToLineMid.start, mouseToLineMid.end)
-        if (lineMidLength < store.state.minDistanceToLineForShadow) return ''
+        if (lineMidLength < store.state.minDistanceToLineForShadow) return this.prevShadowPos
         const mouseToLineMidLonger = shortenLine(mouseToLineMid, window.innerWidth + window.innerHeight)
 
-        return `
+        const shadowPos = `
             ${lineStartToHorizon.start.x},${lineStartToHorizon.start.y}
             ${lineStartToHorizon.end.x},${lineStartToHorizon.end.y}
 
@@ -51,6 +53,8 @@ export default class Shadow extends Vue {
             ${lineEndToHorizon.end.x},${lineEndToHorizon.end.y}
             ${lineEndToHorizon.start.x},${lineEndToHorizon.start.y}
         `
+        this.prevShadowPos = shadowPos
+        return shadowPos
     }
 }
 </script>
