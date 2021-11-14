@@ -2,6 +2,7 @@
 // Determine the intersection point of two line segments
 // Return FALSE if the lines don't intersect
 import {Coord, LineType} from '@/types'
+import store from '@/store/index'
 
 export default (line1: LineType, line2: LineType): Coord | false => {
     const x1 = line1.start.x
@@ -27,10 +28,10 @@ export default (line1: LineType, line2: LineType): Coord | false => {
 
     const ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denominator
     const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator
-    const smallAmount = 0.0001
+    const tolerance = store.state.intersectionTolerance
 
     // is the intersection along the segments
-    if (ua < -smallAmount || ua > 1 + smallAmount || ub < -smallAmount || ub > 1 + smallAmount) {
+    if (ua < -tolerance || ua > 1 + tolerance || ub < -tolerance || ub > 1 + tolerance) {
         return false
     }
 

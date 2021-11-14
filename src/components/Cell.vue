@@ -51,6 +51,6 @@ export default class Cell extends Vue {
     cx: calc(var(--dotSize) / 2);
     cy: calc(var(--dotSize) / 2);
     r: calc(var(--dotSize) / 2);
-    fill: var(--fg);
+    fill: var(--fg1p5);
 }
 </style>

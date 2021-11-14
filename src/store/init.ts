@@ -16,6 +16,7 @@ const storeState = {
     mouseThrottle: 20,
     minDistanceToLineForShadow: 1,
     shadowOpacity: 0.03,
+    intersectionTolerance: 0.0001,
 
     // colours
     bg: '#eee',
@@ -49,6 +50,7 @@ const units = <{[key in keyof typeof storeState]: string}>{
     mouseThrottle: '',
     minDistanceToLineForShadow: '',
     shadowOpacity: '',
+    intersectionTolerance: '',
 
     // colours
     bg: '',
