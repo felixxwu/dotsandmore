@@ -33,8 +33,10 @@ export default class App extends Vue {
     }
 
     handleMouseMove(e: MouseEvent): void {
-        const point = {x: e.clientX, y: e.clientY}
-        this.updateLightSourceInStore(point)
+        setTimeout(() => {
+            const point = {x: e.clientX, y: e.clientY}
+            this.updateLightSourceInStore(point)
+        })
     }
 }
 </script>
