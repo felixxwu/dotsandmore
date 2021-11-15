@@ -5,7 +5,7 @@ const config = {
     appWidth:                   {value: 0,  unit: 'px'},
     appHeight:                  {value: 0,  unit: 'px'},
     paddingMed:                 {value: 10, unit: 'px'},
-    cellWidth:                  {value: 30, unit: 'px'},
+    cellWidth:                  {value: 40, unit: 'px'},
     dotSize:                    {value: 4,  unit: 'px'},
     shadowBlurRadius:           {value: 0,  unit: 'px'},
     padding1:                   {value: 10, unit: 'px'},
@@ -16,11 +16,11 @@ const config = {
     maxLineLength:              {value: 2.5,    unit: ''},
     mouseThrottle:              {value: 20,     unit: ''},
     minDistanceToLineForShadow: {value: 1,      unit: ''},
-    shadowOpacity:              {value: 0.03,   unit: ''},
     intersectionTolerance:      {value: 0.0001, unit: ''},
     populateLinesDuration:      {value: 5000,   unit: ''},
     canvasResolutionPerCell:    {value: 100,    unit: ''},
     fillStartDistance:          {value: 15,     unit: ''},
+    gridLineWidth:              {value: 1,      unit: ''},
 
     // colours
     bg:                         {value: '#eee',            unit: ''},
@@ -28,6 +28,8 @@ const config = {
     fg1p5:                      {value: '#999',            unit: ''},
     fg2:                        {value: '#bbb',            unit: ''},
     highlight:                  {value: 'rgba(0,0,0,0.1)', unit: ''},
+    shadowOpacity:              {value: 0.03,              unit: ''},
+    gridLineOpacity:            {value: 0.3,               unit: ''},
     bgSat:                      {value: 50,                unit: '%'},
     bgLight:                    {value: 93,                unit: '%'},
 

@@ -7,6 +7,7 @@
             @pointerup="handlePointerUp"
             @pointerleave="handlePointerLeave"
         />
+        <GridLines />
         <Canvas class="canvas" />
         <svg class="shadows">
             <Shadow v-for="line in lines" :key="line" :line-data="line" :grid="grid" />
@@ -33,9 +34,11 @@ import Shadow from '@/components/Shadow.vue'
 import {Ref} from 'vue-property-decorator'
 import Canvas from '@/components/Canvas.vue'
 import addLineIfItDoesntExist from '@/utils/addLineIfItDoesntExist'
+import GridLines from '@/components/GridLines.vue'
 
 @Options({
     components: {
+        GridLines,
         Canvas,
         Shadow,
         Cell,
@@ -122,17 +125,20 @@ export default class Grid extends Vue {
 .lines {
     position: absolute;
     pointer-events: none;
+    z-index: 1;
 }
 
 .touch-surface {
     position: absolute;
     cursor: pointer;
     touch-action: none;
+    z-index: 1;
 }
 
 .canvas {
     position: absolute;
     pointer-events: none;
+    z-index: 1;
 }
 
 .shadows {
@@ -144,5 +150,6 @@ export default class Grid extends Vue {
     pointer-events: none;
     opacity: var(--shadowOpacity);
     filter: blur(var(--shadowBlurRadius));
+    z-index: 1;
 }
 </style>

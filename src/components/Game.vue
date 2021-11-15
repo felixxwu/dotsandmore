@@ -40,6 +40,6 @@ export default class Game extends Vue {
 .message {
     padding: var(--padding1);
     font-family: 'Lexend Deca', sans-serif;
-    color: var(--fg1);
+    color: var(--fg);
 }
 </style>

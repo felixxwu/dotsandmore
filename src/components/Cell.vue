@@ -33,6 +33,7 @@ export default class Cell extends Vue {
 <style scoped>
 .cell {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     width: var(--cellWidth);
