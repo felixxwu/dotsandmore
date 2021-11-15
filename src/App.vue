@@ -37,6 +37,7 @@ export default class App extends Vue {
 
     async populateWithSafeLines(): Promise<void> {
         log('populating lines for', store.state.populateLinesDuration, 'ms...')
+        store.commit('setPopulatingLines', true)
         let continueAdding = true
         setTimeout(() => {
             continueAdding = false
@@ -46,6 +47,7 @@ export default class App extends Vue {
             await new Promise((r) => setTimeout(r))
         }
         log('finished populating lines.')
+        store.commit('setPopulatingLines', false)
     }
 
     handleMouseMove(e: MouseEvent): void {
@@ -58,6 +60,8 @@ export default class App extends Vue {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+
 body {
     margin: 0;
     overflow: hidden;

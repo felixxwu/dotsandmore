@@ -1,41 +1,46 @@
-import {Coord, LineType} from '@/types'
-
-const aboveScreen = <Coord>{y: 0, x: window.innerWidth / 2}
+import {Coord, FillPoint, LineType} from '@/types'
 
 const config = {
     // lengths
-    appWidth:                   {value: 0,                     unit: 'px'},
-    appHeight:                  {value: 0,                     unit: 'px'},
-    paddingMed:                 {value: 10,                    unit: 'px'},
-    cellWidth:                  {value: 30,                    unit: 'px'},
-    dotSize:                    {value: 4,                     unit: 'px'},
-    shadowBlurRadius:           {value: 0,                     unit: 'px'},
+    appWidth:                   {value: 0,  unit: 'px'},
+    appHeight:                  {value: 0,  unit: 'px'},
+    paddingMed:                 {value: 10, unit: 'px'},
+    cellWidth:                  {value: 30, unit: 'px'},
+    dotSize:                    {value: 4,  unit: 'px'},
+    shadowBlurRadius:           {value: 0,  unit: 'px'},
+    padding1:                   {value: 10, unit: 'px'},
 
     // numbers
-    gridSizeW:                  {value: 0,                     unit: ''},
-    gridSizeH:                  {value: 0,                     unit: ''},
-    maxLineLength:              {value: 2.5,                   unit: ''},
-    mouseThrottle:              {value: 20,                    unit: ''},
-    minDistanceToLineForShadow: {value: 1,                     unit: ''},
-    shadowOpacity:              {value: 0.03,                  unit: ''},
-    intersectionTolerance:      {value: 0.0001,                unit: ''},
-    populateLinesDuration:      {value: 5000,                  unit: ''},
+    gridSizeW:                  {value: 0,      unit: ''},
+    gridSizeH:                  {value: 0,      unit: ''},
+    maxLineLength:              {value: 2.5,    unit: ''},
+    mouseThrottle:              {value: 20,     unit: ''},
+    minDistanceToLineForShadow: {value: 1,      unit: ''},
+    shadowOpacity:              {value: 0.03,   unit: ''},
+    intersectionTolerance:      {value: 0.0001, unit: ''},
+    populateLinesDuration:      {value: 5000,   unit: ''},
+    canvasResolutionPerCell:    {value: 50,     unit: ''},
+    fillStartDistance:          {value: 10,     unit: ''},
 
     // colours
-    bg:                         {value: '#eee',                unit: ''},
-    fg:                         {value: '#555',                unit: ''},
-    fg1p5:                      {value: '#999',                unit: ''},
-    fg2:                        {value: '#bbb',                unit: ''},
-    highlight:                  {value: 'rgba(0,0,0,0.1)',     unit: ''},
-    bgSat:                      {value: 60,                    unit: '%'},
-    bgLight:                    {value: 95,                    unit: '%'},
+    bg:                         {value: '#eee',            unit: ''},
+    fg:                         {value: '#555',            unit: ''},
+    fg1p5:                      {value: '#999',            unit: ''},
+    fg2:                        {value: '#bbb',            unit: ''},
+    highlight:                  {value: 'rgba(0,0,0,0.1)', unit: ''},
+    bgSat:                      {value: 60,                unit: '%'},
+    bgLight:                    {value: 95,                unit: '%'},
 
     // other
-    linePreview:                {value: <LineType | null>null, unit: 'hide'},
-    lines:                      {value: <LineType[]>[],        unit: 'hide'},
-    clickedCoord:               {value: <Coord | null>null,    unit: 'hide'},
-    lightSource:                {value: aboveScreen,           unit: 'hide'},
-    enableLogs:                 {value: true,                  unit: 'hide'},
+    populatingLines:            {value: false,                                   unit: ''},
+    turn:                       {value: 0,                                       unit: ''},
+    linePreview:                {value: <LineType | null>null,                   unit: 'hide'},
+    lines:                      {value: <LineType[]>[],                          unit: 'hide'},
+    clickedCoord:               {value: <Coord | null>null,                      unit: 'hide'},
+    lightSource:                {value: <Coord>{y: 0, x: window.innerWidth / 2}, unit: 'hide'},
+    enableLogs:                 {value: true,                                    unit: 'hide'},
+    canvas:                     {value: <HTMLCanvasElement | null>null,          unit: 'hide'},
+    fillPoints:                 {value: <FillPoint[]>[],                         unit: 'hide'},
 }
 
 const typeSafeSet = <O, K extends keyof O, V extends O[K]>(obj: O, key: K, value: V) => {

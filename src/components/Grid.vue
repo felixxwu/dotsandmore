@@ -7,6 +7,7 @@
             @pointerup="handlePointerUp"
             @pointerleave="handlePointerLeave"
         />
+        <Canvas class="canvas" />
         <svg class="shadows">
             <Shadow v-for="line in lines" :key="line" :line-data="line" :grid="grid" />
         </svg>
@@ -31,9 +32,14 @@ import getCoord from '@/utils/getCoord'
 import Shadow from '@/components/Shadow.vue'
 import {Ref} from 'vue-property-decorator'
 import log from '@/utils/log'
+import Canvas from '@/components/Canvas.vue'
+import doesLineAlreadyExist from '@/utils/doesLineAlreadyExist'
+import findEnclosedSpaces from '@/utils/findEnclosedSpaces'
+import updateCanvas from '@/utils/updateCanvas'
 
 @Options({
     components: {
+        Canvas,
         Shadow,
         Cell,
         Line,
@@ -65,17 +71,35 @@ export default class Grid extends Vue {
         if (coord === null) return
         if (store.state.clickedCoord === null) return
         if (isSameCoordinate(store.state.clickedCoord, coord)) {
-            store.commit('setLinePreview', null)
-            store.commit('clickCoord', null)
+            this.resetPreview()
         } else {
             const newLine = createLine(store.state.clickedCoord, coord)
-            log('create new line', newLine)
-            store.commit('addLine', newLine)
+            this.addLineIfDoesntExist(newLine)
         }
     }
 
     handlePointerLeave(): void {
         store.commit('setLinePreview', null)
+    }
+
+    resetPreview(): void {
+        store.commit('setLinePreview', null)
+        store.commit('clickCoord', null)
+    }
+
+    addLineIfDoesntExist(newLine: LineType): void {
+        if (doesLineAlreadyExist(newLine)) {
+            log('line already exists')
+            this.resetPreview()
+        } else {
+            log('create new line', newLine)
+            store.commit('addLine', newLine)
+            store.commit('changeTurn')
+            setTimeout(() => {
+                findEnclosedSpaces(newLine)
+                updateCanvas()
+            })
+        }
     }
 
     get cellCoords(): Coord[] {
@@ -99,10 +123,16 @@ export default class Grid extends Vue {
 </script>
 
 <style scoped>
-.grid {
-    display: grid;
+.grid,
+.lines,
+.touch-surface,
+.canvas {
     width: calc(var(--gridSizeW) * var(--cellWidth));
     height: calc(var(--gridSizeH) * var(--cellWidth));
+}
+
+.grid {
+    display: grid;
     grid-template-rows: repeat(var(--gridSizeH), 1fr);
     grid-template-columns: repeat(var(--gridSizeW), 1fr);
 }
@@ -110,16 +140,17 @@ export default class Grid extends Vue {
 .lines {
     position: absolute;
     pointer-events: none;
-    width: calc(var(--gridSizeW) * var(--cellWidth));
-    height: calc(var(--gridSizeH) * var(--cellWidth));
 }
 
 .touch-surface {
     position: absolute;
     cursor: pointer;
-    width: calc(var(--gridSizeW) * var(--cellWidth));
-    height: calc(var(--gridSizeH) * var(--cellWidth));
     touch-action: none;
+}
+
+.canvas {
+    position: absolute;
+    pointer-events: none;
 }
 
 .shadows {

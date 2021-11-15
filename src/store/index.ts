@@ -1,5 +1,5 @@
 import {createStore} from 'vuex'
-import {LineType, Coord} from '@/types.d.ts'
+import {LineType, Coord, FillPoint} from '@/types.d.ts'
 import {units, storeState} from '@/store/init'
 
 export default createStore({
@@ -48,6 +48,18 @@ export default createStore({
         },
         setLightSourcePos(state, pos: Coord) {
             state.lightSource = pos
+        },
+        setCanvas(state, canvas: HTMLCanvasElement) {
+            state.canvas = canvas
+        },
+        changeTurn(state) {
+            state.turn = state.turn === 0 ? 1 : 0
+        },
+        addFillPoint(state, fillPoint: FillPoint) {
+            state.fillPoints.push(fillPoint)
+        },
+        setPopulatingLines(state, value: boolean) {
+            state.populatingLines = value
         },
     },
     actions: {},
