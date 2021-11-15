@@ -15,6 +15,7 @@ export default (newLine: LineType): void => {
         if (isEnclosed(context, point)) {
             const fillPoint: FillPoint = {position: point, player: store.state.turn}
             log('new enclosed space found', fillPoint)
+            store.commit('changeTurn') // TODO dont change turn twice here
             store.commit('addFillPoint', fillPoint)
         }
     }
