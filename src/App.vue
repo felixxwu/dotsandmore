@@ -31,7 +31,7 @@ export default class App extends Vue {
 
     mounted(): void {
         store.commit('initialise')
-        store.commit('setGridSize', {w: 10, h: 10})
+        store.commit('setGridSize', {w: 8, h: 8})
         store.commit('setLineLength', 2.5)
         this.populateWithSafeLines()
     }

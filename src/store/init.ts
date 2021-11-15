@@ -19,7 +19,7 @@ const config = {
     shadowOpacity:              {value: 0.03,   unit: ''},
     intersectionTolerance:      {value: 0.0001, unit: ''},
     populateLinesDuration:      {value: 5000,   unit: ''},
-    canvasResolutionPerCell:    {value: 100,     unit: ''},
+    canvasResolutionPerCell:    {value: 100,    unit: ''},
     fillStartDistance:          {value: 15,     unit: ''},
 
     // colours
@@ -28,8 +28,8 @@ const config = {
     fg1p5:                      {value: '#999',            unit: ''},
     fg2:                        {value: '#bbb',            unit: ''},
     highlight:                  {value: 'rgba(0,0,0,0.1)', unit: ''},
-    bgSat:                      {value: 60,                unit: '%'},
-    bgLight:                    {value: 95,                unit: '%'},
+    bgSat:                      {value: 50,                unit: '%'},
+    bgLight:                    {value: 93,                unit: '%'},
 
     // other
     populatingLines:            {value: false,                                   unit: ''},
