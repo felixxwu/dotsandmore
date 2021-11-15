@@ -32,6 +32,9 @@ export default createStore({
             state.gridSizeW = size.w
             state.gridSizeH = size.h
         },
+        setLineLength(state, length: number) {
+            state.maxLineLength = length
+        },
         addLine(state, line: LineType) {
             state.lines.push(line)
             state.clickedCoord = null

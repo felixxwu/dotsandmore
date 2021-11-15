@@ -19,8 +19,8 @@ const config = {
     shadowOpacity:              {value: 0.03,   unit: ''},
     intersectionTolerance:      {value: 0.0001, unit: ''},
     populateLinesDuration:      {value: 5000,   unit: ''},
-    canvasResolutionPerCell:    {value: 50,     unit: ''},
-    fillStartDistance:          {value: 10,     unit: ''},
+    canvasResolutionPerCell:    {value: 100,     unit: ''},
+    fillStartDistance:          {value: 15,     unit: ''},
 
     // colours
     bg:                         {value: '#eee',            unit: ''},
