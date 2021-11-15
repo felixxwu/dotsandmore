@@ -31,11 +31,8 @@ import createLine from '@/utils/createLine'
 import getCoord from '@/utils/getCoord'
 import Shadow from '@/components/Shadow.vue'
 import {Ref} from 'vue-property-decorator'
-import log from '@/utils/log'
 import Canvas from '@/components/Canvas.vue'
-import doesLineAlreadyExist from '@/utils/doesLineAlreadyExist'
-import findEnclosedSpaces from '@/utils/findEnclosedSpaces'
-import updateCanvas from '@/utils/updateCanvas'
+import addLineIfItDoesntExist from '@/utils/addLineIfItDoesntExist'
 
 @Options({
     components: {
@@ -51,7 +48,6 @@ export default class Grid extends Vue {
     handlePointerDown(e: PointerEvent): void {
         const coord = getCoord(e)
         if (coord === null) return
-        log('starting new line at', coord)
         store.commit('clickCoord', coord)
     }
 
@@ -74,7 +70,8 @@ export default class Grid extends Vue {
             this.resetPreview()
         } else {
             const newLine = createLine(store.state.clickedCoord, coord)
-            this.addLineIfDoesntExist(newLine)
+            const lineExists = addLineIfItDoesntExist(newLine)
+            if (lineExists) this.resetPreview()
         }
     }
 
@@ -85,21 +82,6 @@ export default class Grid extends Vue {
     resetPreview(): void {
         store.commit('setLinePreview', null)
         store.commit('clickCoord', null)
-    }
-
-    addLineIfDoesntExist(newLine: LineType): void {
-        if (doesLineAlreadyExist(newLine)) {
-            log('line already exists')
-            this.resetPreview()
-        } else {
-            log('create new line', newLine)
-            store.commit('addLine', newLine)
-            store.commit('changeTurn')
-            setTimeout(() => {
-                findEnclosedSpaces(newLine)
-                updateCanvas()
-            })
-        }
     }
 
     get cellCoords(): Coord[] {
