@@ -16,11 +16,11 @@
 
 <script lang="ts">
 import {Vue} from 'vue-class-component'
-import {CanvasLine} from '@/types'
+import {CssLine} from '@/types'
 import store from '@/store/index'
 
 export default class Cell extends Vue {
-    get lines(): CanvasLine[] {
+    get lines(): CssLine[] {
         const lines = []
         // vertical lines
         for (let i = 0; i < store.state.gridSizeH; i++) {

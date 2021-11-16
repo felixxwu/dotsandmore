@@ -29,6 +29,7 @@ export default class App extends Vue {
     })
 
     mounted(): void {
+        document.title = 'Dots & More'
         store.commit('initialise')
         store.commit('setGridSize', {w: 8, h: 8})
         store.commit('setLineLength', 2.5)

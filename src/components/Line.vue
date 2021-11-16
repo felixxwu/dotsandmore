@@ -14,10 +14,10 @@ export default class Line extends Vue {
 
     get linePos(): {x1: number; y1: number; x2: number; y2: number} {
         return {
-            x1: this.lineData.start.x * store.state.cellWidth + store.state.cellWidth / 2,
-            y1: this.lineData.start.y * store.state.cellWidth + store.state.cellWidth / 2,
-            x2: this.lineData.end.x * store.state.cellWidth + store.state.cellWidth / 2,
-            y2: this.lineData.end.y * store.state.cellWidth + store.state.cellWidth / 2,
+            x1: (this.lineData.start.x + 0.5) * store.state.cellWidth,
+            y1: (this.lineData.start.y + 0.5) * store.state.cellWidth,
+            x2: (this.lineData.end.x + 0.5) * store.state.cellWidth,
+            y2: (this.lineData.end.y + 0.5) * store.state.cellWidth,
         }
     }
 
