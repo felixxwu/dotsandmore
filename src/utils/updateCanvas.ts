@@ -15,7 +15,7 @@ export default (): void => {
         context.stroke()
     }
     for (const fillPoint of store.state.fillPoints) {
-        const colour = fillPoint.player === 0 ? 0xff8888ff : 0xffff8888
+        const colour = store.state.playerColours[fillPoint.player].hex
         floodFill(context, Math.floor(fillPoint.position.x), Math.floor(fillPoint.position.y), colour)
     }
     calculateAreaCovered()

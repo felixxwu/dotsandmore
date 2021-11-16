@@ -1,5 +1,7 @@
 import {Coord, FillPoint, LineType} from '@/types'
 
+const playerColours = [{hex: 0xffaaaaff, css: '#ffaaaa'}, {hex: 0xffffaaaa, css: '#aaaaff'}]
+
 const config = {
     // lengths
     appWidth:                   {value: 0,  unit: 'px'},
@@ -21,6 +23,8 @@ const config = {
     canvasResolutionPerCell:    {value: 100,    unit: ''},
     fillStartDistance:          {value: 15,     unit: ''},
     gridLineWidth:              {value: 1,      unit: ''},
+    hideScoresUnder:            {value: 20,     unit: ''},
+    scoreDecimalPlaces:         {value: 1,      unit: ''},
 
     // colours
     bg:                         {value: '#eee',            unit: ''},
@@ -44,6 +48,7 @@ const config = {
     canvas:                     {value: <HTMLCanvasElement | null>null,          unit: 'hide'},
     fillPoints:                 {value: <FillPoint[]>[],                         unit: 'hide'},
     areaCovered:                {value: <number[]>[0, 0],                        unit: 'hide'},
+    playerColours:              {value: playerColours,                           unit: 'hide'},
 }
 
 const typeSafeSet = <O, K extends keyof O, V extends O[K]>(obj: O, key: K, value: V) => {

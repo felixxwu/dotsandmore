@@ -1,6 +1,6 @@
 <template>
     <div class="game">
-        <div class="area">{{ areaCovered }}</div>
+        <Score />
         <Grid />
         <div class="message">{{ message }}</div>
     </div>
@@ -11,22 +11,15 @@ import {Options, Vue} from 'vue-class-component'
 import store from '@/store/index'
 
 import Grid from './Grid.vue'
+import Score from '@/components/Score.vue'
 
 @Options({
     components: {
+        Score,
         Grid,
     },
 })
 export default class Game extends Vue {
-    get areaCovered(): string {
-        const p0 = store.state.areaCovered[0]
-        const p1 = store.state.areaCovered[1]
-        if (p0 === 0 && p1 === 0) return 'Red: 0% Blue: 0%'
-        const redPercent = ((p0 / (p0 + p1)) * 100).toFixed(2)
-        const bluePercent = ((p1 / (p0 + p1)) * 100).toFixed(2)
-        return `Red: ${redPercent}% Blue: ${bluePercent}%`
-    }
-
     get message(): string {
         if (store.state.populatingLines) {
             return 'Populating...'
@@ -47,7 +40,6 @@ export default class Game extends Vue {
     height: var(--appHeight);
 }
 
-.area,
 .message {
     padding: var(--padding1);
     font-family: 'Lexend Deca', sans-serif;
