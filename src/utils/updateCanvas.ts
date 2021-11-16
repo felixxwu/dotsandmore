@@ -1,6 +1,7 @@
 import store from '@/store/index'
 import floodFill from '@/utils/floodFill'
 import getCanvasLines from '@/utils/getCanvasLines'
+import calculateAreaCovered from '@/utils/calculateAreaCovered'
 
 export default (): void => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -17,4 +18,5 @@ export default (): void => {
         const colour = fillPoint.player === 0 ? 0xff8888ff : 0xffff8888
         floodFill(context, Math.floor(fillPoint.position.x), Math.floor(fillPoint.position.y), colour)
     }
+    calculateAreaCovered()
 }

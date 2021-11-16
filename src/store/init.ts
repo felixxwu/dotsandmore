@@ -43,6 +43,7 @@ const config = {
     enableLogs:                 {value: true,                                    unit: 'hide'},
     canvas:                     {value: <HTMLCanvasElement | null>null,          unit: 'hide'},
     fillPoints:                 {value: <FillPoint[]>[],                         unit: 'hide'},
+    areaCovered:                {value: <number[]>[0, 0],                        unit: 'hide'},
 }
 
 const typeSafeSet = <O, K extends keyof O, V extends O[K]>(obj: O, key: K, value: V) => {
