@@ -22,12 +22,12 @@ export default class Shadow extends Vue {
         const gridRect = this.grid.getClientRects()[0]
         const clientPosLine: LineType = {
             start: {
-                x: gridRect.left + this.lineData.start.x * store.state.cellWidth + store.state.cellWidth / 2,
-                y: gridRect.top + this.lineData.start.y * store.state.cellWidth + store.state.cellWidth / 2,
+                x: gridRect.left + (this.lineData.start.x + 0.5) * store.state.cellWidth,
+                y: gridRect.top + (this.lineData.start.y + 0.5) * store.state.cellWidth,
             },
             end: {
-                x: gridRect.left + this.lineData.end.x * store.state.cellWidth + store.state.cellWidth / 2,
-                y: gridRect.top + this.lineData.end.y * store.state.cellWidth + store.state.cellWidth / 2,
+                x: gridRect.left + (this.lineData.end.x + 0.5) * store.state.cellWidth,
+                y: gridRect.top + (this.lineData.end.y + 0.5) * store.state.cellWidth,
             },
         }
         const mouseToLineStart = {start: p, end: clientPosLine.start}
