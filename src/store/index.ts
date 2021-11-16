@@ -67,6 +67,12 @@ export default createStore({
         setAreaCovered(state, value: number[]) {
             state.areaCovered = value
         },
+        setErrorMessageTemporarily(state, message: string) {
+            state.errorMessage = message
+            setTimeout(() => {
+                state.errorMessage = ''
+            }, state.errorMessageTimeout)
+        },
     },
     actions: {},
     modules: {},

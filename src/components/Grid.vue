@@ -70,11 +70,15 @@ export default class Grid extends Vue {
         if (coord === null) return
         if (store.state.clickedCoord === null) return
         if (isSameCoordinate(store.state.clickedCoord, coord)) {
+            store.commit('setErrorMessageTemporarily', 'No line added')
             this.resetPreview()
         } else {
             const newLine = createLine(store.state.clickedCoord, coord)
-            const lineExists = addLineIfItDoesntExist(newLine)
-            if (lineExists) this.resetPreview()
+            const lineIsNew = addLineIfItDoesntExist(newLine)
+            if (!lineIsNew) {
+                store.commit('setErrorMessageTemporarily', 'Cannot create a line there')
+                this.resetPreview()
+            }
         }
     }
 

@@ -21,11 +21,9 @@ import Score from '@/components/Score.vue'
 })
 export default class Game extends Vue {
     get message(): string {
-        if (store.state.populatingLines) {
-            return 'Populating...'
-        } else {
-            return `${store.state.turn === 0 ? 'Blue' : 'Red'}'s turn.`
-        }
+        if (store.state.populatingLines) return 'Populating...'
+        if (store.state.errorMessage.length > 0) return store.state.errorMessage
+        return `${store.state.turn === 0 ? 'Blue' : 'Red'}'s turn`
     }
 }
 </script>

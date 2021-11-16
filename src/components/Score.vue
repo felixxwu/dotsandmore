@@ -6,7 +6,7 @@
             class="score"
             :style="`width: ${score.width}px; background-color: ${score.colour}; transition: 1s;`"
         >
-            <span v-show="score.score > minScore">{{ score.score }}%</span>
+            <span v-show="score.width > minScore">{{ score.score }}%</span>
         </div>
     </div>
 </template>
@@ -24,8 +24,8 @@ export default class Score extends Vue {
         const gridSize = store.state.gridSizeW * store.state.cellWidth
         if (p0 === 0 && p1 === 0)
             return [
-                {colour: red, score: 50, width: gridSize / 2},
-                {colour: blue, score: 50, width: gridSize / 2},
+                {colour: red, score: 0, width: gridSize / 2},
+                {colour: blue, score: 0, width: gridSize / 2},
             ]
         const redPercent = parseFloat(((p0 / (p0 + p1)) * 100).toFixed(store.state.scoreDecimalPlaces))
         const bluePercent = parseFloat(((p1 / (p0 + p1)) * 100).toFixed(store.state.scoreDecimalPlaces))
@@ -35,8 +35,8 @@ export default class Score extends Vue {
         ]
     }
 
-    get minScore(): typeof store.state.hideScoresUnder {
-        return store.state.hideScoresUnder
+    get minScore(): typeof store.state.minScoreWidth {
+        return store.state.minScoreWidth
     }
 }
 </script>

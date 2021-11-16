@@ -23,8 +23,9 @@ const config = {
     canvasResolutionPerCell:    {value: 100,    unit: ''},
     fillStartDistance:          {value: 15,     unit: ''},
     gridLineWidth:              {value: 1,      unit: ''},
-    hideScoresUnder:            {value: 20,     unit: ''},
+    minScoreWidth:              {value: 50,     unit: ''},
     scoreDecimalPlaces:         {value: 1,      unit: ''},
+    errorMessageTimeout:        {value: 2000,   unit: ''},
 
     // colours
     bg:                         {value: '#eee',            unit: ''},
@@ -49,6 +50,7 @@ const config = {
     fillPoints:                 {value: <FillPoint[]>[],                         unit: 'hide'},
     areaCovered:                {value: <number[]>[0, 0],                        unit: 'hide'},
     playerColours:              {value: playerColours,                           unit: 'hide'},
+    errorMessage:               {value: '',                                      unit: 'hide'},
 }
 
 const typeSafeSet = <O, K extends keyof O, V extends O[K]>(obj: O, key: K, value: V) => {
