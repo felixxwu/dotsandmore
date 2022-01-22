@@ -4,13 +4,16 @@ const playerColours = [{hex: 0xffaaaaff, css: '#ffaaaa'}, {hex: 0xffffaaaa, css:
 
 const config = {
     // lengths
-    appWidth:                   {value: 0,  unit: 'px'},
-    appHeight:                  {value: 0,  unit: 'px'},
-    paddingMed:                 {value: 10, unit: 'px'},
-    cellWidth:                  {value: 40, unit: 'px'},
-    dotSize:                    {value: 4,  unit: 'px'},
-    shadowBlurRadius:           {value: 0,  unit: 'px'},
-    padding1:                   {value: 10, unit: 'px'},
+    appWidth:                   {value: 0,   unit: 'px'},
+    appHeight:                  {value: 0,   unit: 'px'},
+    paddingMed:                 {value: 10,  unit: 'px'},
+    cellWidth:                  {value: 40,  unit: 'px'},
+    dotSize:                    {value: 4,   unit: 'px'},
+    shadowBlurRadius:           {value: 0,   unit: 'px'},
+    padding1:                   {value: 10,  unit: 'px'},
+    buttonWidth:                {value: 300, unit: 'px'},
+    buttonHeight:               {value: 50,  unit: 'px'},
+    buttonPadding:              {value: 10,  unit: 'px'},
 
     // numbers
     gridSizeW:                  {value: 0,      unit: ''},
@@ -33,13 +36,14 @@ const config = {
     fg1p5:                      {value: '#999',            unit: ''},
     fg2:                        {value: '#bbb',            unit: ''},
     highlight:                  {value: 'rgba(0,0,0,0.1)', unit: ''},
-    shadowOpacity:              {value: 0.03,              unit: ''},
+    shadowOpacity:              {value: 0.015,             unit: ''},
     gridLineOpacity:            {value: 0.3,               unit: ''},
     bgSat:                      {value: 50,                unit: '%'},
     bgLight:                    {value: 93,                unit: '%'},
 
     // other
     populatingLines:            {value: false,                                   unit: ''},
+    showLinePopulatorButton:    {value: true,                                    unit: ''},
     turn:                       {value: 0,                                       unit: ''},
     linePreview:                {value: <LineType | null>null,                   unit: 'hide'},
     lines:                      {value: <LineType[]>[],                          unit: 'hide'},

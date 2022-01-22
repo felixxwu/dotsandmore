@@ -9,11 +9,8 @@
 <script lang="ts">
 import {Options, Vue} from 'vue-class-component'
 import store from '@/store/index'
-import {throttle} from 'throttle-debounce'
 import AppSizeUpdater from '@/components/AppSizeUpdater.vue'
 import Game from '@/components/Game.vue'
-import {Coord} from '@/types'
-import addSafeLine from '@/utils/addSafeLine'
 
 @Options({
     components: {
@@ -22,37 +19,24 @@ import addSafeLine from '@/utils/addSafeLine'
     },
 })
 export default class App extends Vue {
-    updateLightSourceInStore = throttle(store.state.mouseThrottle, false, (point: Coord) => {
-        setTimeout(() => {
-            store.commit('setLightSourcePos', point)
-        })
-    })
+    lightSourceUpdateQueued = false
 
     mounted(): void {
         document.title = 'Dots & More'
         store.commit('initialise')
         store.commit('setGridSize', {w: 8, h: 8})
-        store.commit('setLineLength', 2.5)
-        this.populateWithSafeLines()
-    }
-
-    async populateWithSafeLines(): Promise<void> {
-        store.commit('setPopulatingLines', true)
-        let continueAdding = true
-        setTimeout(() => {
-            continueAdding = false
-        }, store.state.populateLinesDuration)
-        while (continueAdding) {
-            addSafeLine()
-            await new Promise((r) => setTimeout(r))
-        }
-        store.commit('setPopulatingLines', false)
+        store.commit('setLineLength', 1.5)
     }
 
     handleMouseMove(e: MouseEvent): void {
+        // don't try to update light source again if the previous one hasn't finished yet
+        if (this.lightSourceUpdateQueued) return
+        this.lightSourceUpdateQueued = true
         setTimeout(() => {
-            const point = {x: e.clientX, y: e.clientY}
-            this.updateLightSourceInStore(point)
+            const x = window.innerWidth / 3 + e.clientX / 3
+            const point = {x: x, y: 0}
+            store.commit('setLightSourcePos', point)
+            this.lightSourceUpdateQueued = false
         })
     }
 }

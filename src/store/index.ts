@@ -64,6 +64,9 @@ export default createStore({
         setPopulatingLines(state, value: boolean) {
             state.populatingLines = value
         },
+        setPopulatorButton(state, value: boolean) {
+            state.showLinePopulatorButton = value
+        },
         setAreaCovered(state, value: number[]) {
             state.areaCovered = value
         },
