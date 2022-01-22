@@ -16,7 +16,7 @@ function floodFill(ctx: CanvasRenderingContext2D, x: number, y: number, fillColo
     // read the pixels in the canvas
     const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height)
 
-    // make a Uint32Array view on the pixels so we can manipulate pixels
+    // make a Uint32Array view on the pixels so that we can manipulate pixels
     // one 32bit value at a time instead of as 4 bytes per pixel
     const pixelData: PixelData = {
         width: imageData.width,
