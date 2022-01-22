@@ -26,6 +26,7 @@ export default class Menu extends Vue {
     width: var(--appWidth);
     height: var(--appHeight);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

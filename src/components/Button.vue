@@ -35,7 +35,6 @@ export default class Button extends Vue {
 
 <style scoped>
 .button {
-    font-family: 'Lexend Deca', sans-serif;
     width: var(--buttonWidth);
     height: var(--buttonHeight);
     display: flex;

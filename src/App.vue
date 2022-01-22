@@ -56,6 +56,7 @@ export default class App extends Vue {
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
 
 body {
+    font-family: 'Lexend Deca', sans-serif;
     margin: 0;
     overflow: hidden;
 

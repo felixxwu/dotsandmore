@@ -46,7 +46,6 @@ export default class Score extends Vue {
     width: calc(var(--gridSizeW) * var(--cellWidth));
     display: flex;
     margin: var(--padding1);
-    font-family: 'Lexend Deca', sans-serif;
     color: var(--fg);
     border-radius: 10px;
     overflow: hidden;
