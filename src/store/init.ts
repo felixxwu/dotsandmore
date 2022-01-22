@@ -18,9 +18,9 @@ const config = {
     buttonBorderThickness:      {value: 1,   unit: 'px'},
 
     // numbers
-    gridSizeW:                  {value: 0,      unit: ''},
-    gridSizeH:                  {value: 0,      unit: ''},
-    maxLineLength:              {value: 2.5,    unit: ''},
+    gridSizeW:                  {value: 8,      unit: ''},
+    gridSizeH:                  {value: 8,      unit: ''},
+    maxLineLength:              {value: 1.5,    unit: ''},
     mouseThrottle:              {value: 20,     unit: ''},
     minDistanceToLineForShadow: {value: 1,      unit: ''},
     intersectionTolerance:      {value: 0.0001, unit: ''},

@@ -29,9 +29,6 @@ export default class App extends Vue {
     mounted(): void {
         document.title = 'Dots & More'
         store.commit('initialise')
-        setStoreValue('gridSizeW', 8)
-        setStoreValue('gridSizeH', 8)
-        setStoreValue('maxLineLength', 1.5)
     }
 
     handleMouseMove(e: MouseEvent): void {
@@ -57,6 +54,7 @@ export default class App extends Vue {
 
 body {
     font-family: 'Lexend Deca', sans-serif;
+    font-size: 16px;
     margin: 0;
     overflow: hidden;
 
@@ -66,6 +64,11 @@ body {
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+input {
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 16px;
 }
 
 #app {
