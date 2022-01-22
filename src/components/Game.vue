@@ -8,6 +8,7 @@
             label="Populate with safe lines"
             :click-handler="populateWithSafeLines"
         />
+        <Button label="Exit" :click-handler="handleExit" />
     </div>
 </template>
 
@@ -19,6 +20,7 @@ import Grid from './Grid.vue'
 import Score from '@/components/Score.vue'
 import Button from '@/components/Button.vue'
 import addSafeLine from '@/utils/addSafeLine'
+import setStoreValue from '@/utils/setStoreValue'
 
 @Options({
     components: {
@@ -29,7 +31,7 @@ import addSafeLine from '@/utils/addSafeLine'
 })
 export default class Game extends Vue {
     async populateWithSafeLines(): Promise<void> {
-        store.commit('setPopulatingLines', true)
+        setStoreValue('populatingLines', true)
         let continueAdding = true
         setTimeout(() => {
             continueAdding = false
@@ -38,8 +40,18 @@ export default class Game extends Vue {
             addSafeLine()
             await new Promise((r) => setTimeout(r))
         }
-        store.commit('setPopulatingLines', false)
-        store.commit('setPopulatorButton', false)
+        setStoreValue('populatingLines', false)
+        setStoreValue('showLinePopulatorButton', false)
+    }
+
+    async handleExit(): Promise<void> {
+        if (store.state.populatingLines) return
+        setStoreValue('currentScreen', 'menu')
+        setStoreValue('fillPoints', [])
+        setStoreValue('areaCovered', [0, 0])
+        setStoreValue('canvas', null)
+        setStoreValue('lines', [])
+        setStoreValue('showLinePopulatorButton', true)
     }
 
     get message(): string {
@@ -68,6 +80,5 @@ export default class Game extends Vue {
     padding: var(--padding1);
     font-family: 'Lexend Deca', sans-serif;
     color: var(--fg);
-    margin-bottom: var(--paddingMed);
 }
 </style>

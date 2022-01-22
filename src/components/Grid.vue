@@ -35,6 +35,7 @@ import {Ref} from 'vue-property-decorator'
 import Canvas from '@/components/Canvas.vue'
 import addLineIfItDoesntExist from '@/utils/addLineIfItDoesntExist'
 import GridLines from '@/components/GridLines.vue'
+import setStoreValue from '@/utils/setStoreValue'
 
 @Options({
     components: {
@@ -51,7 +52,7 @@ export default class Grid extends Vue {
     handlePointerDown(e: PointerEvent): void {
         const coord = getCoord(e)
         if (coord === null) return
-        store.commit('clickCoord', coord)
+        setStoreValue('clickedCoord', coord)
     }
 
     handlePointerMove(e: PointerEvent): void {
@@ -59,9 +60,9 @@ export default class Grid extends Vue {
         if (e.buttons === 0) return
         if (store.state.clickedCoord === null) return
         if (coord === null || isSameCoordinate(store.state.clickedCoord, coord)) {
-            store.commit('setLinePreview', null)
+            setStoreValue('linePreview', null)
         } else {
-            store.commit('setLinePreview', createLine(store.state.clickedCoord, coord))
+            setStoreValue('linePreview', createLine(store.state.clickedCoord, coord))
         }
     }
 
@@ -83,12 +84,12 @@ export default class Grid extends Vue {
     }
 
     handlePointerLeave(): void {
-        store.commit('setLinePreview', null)
+        setStoreValue('linePreview', null)
     }
 
     resetPreview(): void {
-        store.commit('setLinePreview', null)
-        store.commit('clickCoord', null)
+        setStoreValue('linePreview', null)
+        setStoreValue('clickedCoord', null)
     }
 
     get cellCoords(): Coord[] {

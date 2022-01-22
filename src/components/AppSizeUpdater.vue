@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import {Vue} from 'vue-class-component'
-import store from '../store/index'
+import setStoreValue from '@/utils/setStoreValue'
 
 export default class AppSizeUpdater extends Vue {
     // noinspection JSUnusedGlobalSymbols
@@ -14,10 +14,8 @@ export default class AppSizeUpdater extends Vue {
     }
 
     updateWindowSize(): void {
-        store.commit('setAppSize', {
-            w: window.innerWidth,
-            h: window.innerHeight,
-        })
+        setStoreValue('appWidth', window.innerWidth)
+        setStoreValue('appHeight', window.innerHeight)
         document.body.style.width = window.innerWidth + 'px'
         document.body.style.height = window.innerHeight + 'px'
     }

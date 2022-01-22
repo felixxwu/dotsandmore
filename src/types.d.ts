@@ -4,5 +4,6 @@ type CanvasLine = {start: Position; end: Position}
 type LineType = {start: Coord; end: Coord}
 type CssLine = {start: Position; end: Position}
 type FillPoint = {position: Position; player: number}
+type Screen = 'menu' | 'game'
 
-export {Coord, LineType, Position, CanvasLine, CssLine, FillPoint}
+export {Coord, LineType, Position, CanvasLine, CssLine, FillPoint, Screen}

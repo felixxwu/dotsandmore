@@ -5,14 +5,14 @@
 <script lang="ts">
 import {Vue} from 'vue-class-component'
 import {Ref} from 'vue-property-decorator'
-import store from '@/store/index'
 import getCanvasResolution from '@/utils/getCanvasResolution'
+import setStoreValue from '@/utils/setStoreValue'
 
 export default class Canvas extends Vue {
     @Ref() readonly canvas: HTMLCanvasElement
 
     mounted(): void {
-        store.commit('setCanvas', this.canvas)
+        setStoreValue('canvas', this.canvas)
     }
 
     get resolution(): ReturnType<typeof getCanvasResolution> {

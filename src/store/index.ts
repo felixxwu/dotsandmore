@@ -1,5 +1,5 @@
 import {createStore} from 'vuex'
-import {LineType, Coord, FillPoint} from '@/types.d.ts'
+import {LineType, FillPoint} from '@/types.d.ts'
 import {units, storeState} from '@/store/init'
 
 export default createStore({
@@ -18,57 +18,30 @@ export default createStore({
     }),
     mutations: {
         initialise: <T extends keyof typeof storeState>(state: typeof storeState) => {
+            // just runs through the proxy set function for all store values once
             const storeKeys = Object.keys(state) as Array<T>
             for (const storeKey of storeKeys) {
                 // eslint-disable-next-line no-self-assign
                 state[storeKey] = state[storeKey]
             }
         },
-        setAppSize(state, size: {w: number; h: number}) {
-            state.appWidth = size.w
-            state.appHeight = size.h
+        set: <T extends keyof typeof storeState>(
+            state: typeof storeState,
+            payload: {key: T; value: typeof storeState[T]},
+        ) => {
+            state[payload.key] = payload.value
         },
-        setGridSize(state, size: {w: number; h: number}) {
-            state.gridSizeW = size.w
-            state.gridSizeH = size.h
-        },
-        setLineLength(state, length: number) {
-            state.maxLineLength = length
-        },
+
         addLine(state, line: LineType) {
             state.lines.push(line)
             state.clickedCoord = null
             state.linePreview = null
-        },
-        clickCoord(state, coord: Coord) {
-            state.clickedCoord = coord
-        },
-        clearClickedCoord(state) {
-            state.clickedCoord = null
-        },
-        setLinePreview(state, line: LineType) {
-            state.linePreview = line
-        },
-        setLightSourcePos(state, pos: Coord) {
-            state.lightSource = pos
-        },
-        setCanvas(state, canvas: HTMLCanvasElement) {
-            state.canvas = canvas
         },
         changeTurn(state) {
             state.turn = state.turn === 0 ? 1 : 0
         },
         addFillPoint(state, fillPoint: FillPoint) {
             state.fillPoints.push(fillPoint)
-        },
-        setPopulatingLines(state, value: boolean) {
-            state.populatingLines = value
-        },
-        setPopulatorButton(state, value: boolean) {
-            state.showLinePopulatorButton = value
-        },
-        setAreaCovered(state, value: number[]) {
-            state.areaCovered = value
         },
         setErrorMessageTemporarily(state, message: string) {
             state.errorMessage = message

@@ -1,4 +1,5 @@
 import store from '@/store/index'
+import setStoreValue from '@/utils/setStoreValue'
 
 export default (): void => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -9,5 +10,5 @@ export default (): void => {
     const player1Colour = store.state.playerColours[1].hex
     const player0Area = array.filter((i) => i === player0Colour).length
     const player1Area = array.filter((i) => i === player1Colour).length
-    store.commit('setAreaCovered', [player0Area, player1Area])
+    setStoreValue('areaCovered', [player0Area, player1Area])
 }

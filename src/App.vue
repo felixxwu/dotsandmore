@@ -1,6 +1,7 @@
 <template>
     <div id="app" @mousemove="handleMouseMove">
-        <Game />
+        <Game v-if="currentScreen === 'game'" />
+        <Menu v-if="currentScreen === 'menu'" />
 
         <AppSizeUpdater />
     </div>
@@ -11,9 +12,13 @@ import {Options, Vue} from 'vue-class-component'
 import store from '@/store/index'
 import AppSizeUpdater from '@/components/AppSizeUpdater.vue'
 import Game from '@/components/Game.vue'
+import {Screen} from '@/types.d.ts'
+import Menu from '@/components/Menu.vue'
+import setStoreValue from '@/utils/setStoreValue'
 
 @Options({
     components: {
+        Menu,
         AppSizeUpdater,
         Game,
     },
@@ -24,8 +29,9 @@ export default class App extends Vue {
     mounted(): void {
         document.title = 'Dots & More'
         store.commit('initialise')
-        store.commit('setGridSize', {w: 8, h: 8})
-        store.commit('setLineLength', 1.5)
+        setStoreValue('gridSizeW', 8)
+        setStoreValue('gridSizeH', 8)
+        setStoreValue('maxLineLength', 1.5)
     }
 
     handleMouseMove(e: MouseEvent): void {
@@ -35,9 +41,13 @@ export default class App extends Vue {
         setTimeout(() => {
             const x = window.innerWidth / 3 + e.clientX / 3
             const point = {x: x, y: 0}
-            store.commit('setLightSourcePos', point)
+            setStoreValue('lightSource', point)
             this.lightSourceUpdateQueued = false
         })
+    }
+
+    get currentScreen(): Screen {
+        return store.state.currentScreen
     }
 }
 </script>
@@ -48,6 +58,13 @@ export default class App extends Vue {
 body {
     margin: 0;
     overflow: hidden;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 #app {

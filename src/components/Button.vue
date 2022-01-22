@@ -1,18 +1,19 @@
 <template>
-    <div class="button">
+    <div class="button" @click="handleClick">
         <div v-if="loading" class="lds-ellipsis">
             <div></div>
             <div></div>
             <div></div>
             <div></div>
         </div>
-        <div v-else @click="handleClick">{{ label }}</div>
+        <div v-else>{{ label }}</div>
     </div>
 </template>
 
 <script lang="ts">
 import {Vue} from 'vue-class-component'
 import {Prop} from 'vue-property-decorator'
+import store from '@/store'
 
 export default class Button extends Vue {
     @Prop() readonly label: string
@@ -21,10 +22,13 @@ export default class Button extends Vue {
     loading = false
 
     handleClick(): void {
+        if (this.loading) return
         this.loading = true
-        this.clickHandler().then(() => {
-            this.loading = false
-        })
+        setTimeout(() => {
+            this.clickHandler().then(() => {
+                this.loading = false
+            })
+        }, store.state.buttonWaitDuration)
     }
 }
 </script>
@@ -37,9 +41,11 @@ export default class Button extends Vue {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--fg);
+    border: var(--buttonBorderThickness) solid var(--fg);
     cursor: pointer;
     color: var(--fg);
+    margin: var(--paddingMed);
+    border-radius: var(--buttonBorderRadius);
 }
 
 .button:hover {
